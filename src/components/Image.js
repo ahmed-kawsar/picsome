@@ -3,7 +3,8 @@ import PropTypes from 'prop-types'
 import { Context } from '../Context'
 
 function Image({ className, img }) {
-  const { isFavorited } = useContext(Context)
+  const { isFavorited, addToCart, cartItems, removeFromCart } =
+    useContext(Context)
   const [hovered, setHovered] = useState(false)
 
   const heartIcon = hovered && (
@@ -14,7 +15,18 @@ function Image({ className, img }) {
       } favorite`}
     ></i>
   )
-  const cartIcon = hovered && <i className='ri-add-circle-line cart'></i>
+  const alreadyInCart = cartItems.some((item) => item.id === img.id)
+
+  const cartIcon =
+    hovered &&
+    (alreadyInCart ? (
+      <i
+        onClick={() => removeFromCart(img.id)}
+        className='ri-shopping-cart-fill cart'
+      ></i>
+    ) : (
+      <i onClick={() => addToCart(img)} className='ri-add-circle-line cart'></i>
+    ))
 
   return (
     <div
@@ -30,7 +42,6 @@ function Image({ className, img }) {
 }
 
 Image.propTypes = {
-  className: PropTypes.string.isRequired,
   img: PropTypes.shape({
     id: PropTypes.string.isRequired,
     url: PropTypes.string.isRequired,

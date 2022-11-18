@@ -33,6 +33,7 @@ main.cart-page {
 .cart-page .total-cost {
   text-align: right;
   font-size: 1.3em;
+  padding-right: 1em;
 }
 
 .cart-page div.order-button {
@@ -60,6 +61,8 @@ div.order-button > button:disabled {
   justify-content: space-between;
   align-items: center;
   margin: 20px 0;
+  padding-left: 2em;
+  padding-right: 2em;
 }
 
 .cart-item img {
